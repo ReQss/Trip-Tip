@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripTip</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="stylesheet.css">
+  <style>
+
+
+    .header{
+      margin-top:2%;
+      text-align: center;
+      float:left;
+      width:100%;
+      height:30%;
+    }
+    input{
+      text-align: center;
+      width:50%;
+      opacity:0.8;
+      background: #cccccccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    input:hover{
+      color:#cccccccc;
+      background-color:black;
+      transition: 0.3s;
+    }
+    .search-bar{
+
+      float:left;
+      width:30%;
+      height:100%;
+    }
+    .header-buttons{
+      padding-right: 3%;
+      text-align: right;
+      float:left;
+      height:100%;
+      width:35%;
+
+    }
+    input{
+      text-align: center;
+      width:50%;
+      opacity:0.8;
+      background: #cccccccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    input:hover{
+      color:#cccccccc;
+      background-color:black;
+      transition: 0.3s;
+    }
+    .search-bar{
+
+      float:left;
+      width:30%;
+      height:100%;
+    }
+    .header-buttons{
+      float:left;
+      height:100%;
+      width:35%;
+
+    }
+    .nav-button{
+      margin-left:5px;
+      width:30px;
+    }
+    .nav-button:hover{
+      transition: 0.3s;
+      transform:scale(1.2);
+      filter:invert(0.5);
+    }
+    select{
+      opacity:0.8;
+      width:20px;
+      background: #cccccccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+  </style>
+
+</head>
+<body>
+
+<th:block th:replace="~{navbar :: navbar(user=${user})}"></th:block>
+<div class="container-fluid py-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
+  <div class="row flex-grow-sm-1 flex-grow-1">
+    <th:block th:replace="~{navbar :: sidebar(user=${user})}"></th:block>
+    <main class="col overflow-auto h-100">
+      <div class="container bg-light border rounded-3 p-3">
+        <h1 th:text="${user.username.toUpperCase()}"></h1>
+        <hr/>
+        <form class="p-4">
+          <h6>Information</h6>
+          <hr class="mt-0 mb-4">
+          <div class="row pt-1">
+            <div class="col-6 mb-3">
+              <h6>Username</h6>
+              <input type="email" class="form-control" th:value="${user.username}">
+            </div>
+            <div class="col-6 mb-3">
+              <h6>Password</h6>
+              <input type="password" class="form-control" value="">
+            </div>
+          </div>
+          <h6>Reviews</h6>
+          <hr class="mt-0 mb-4">
+          <p>WIP - In the future here will be the panel to edit your reviews.</p>
+          <h3>Preferences</h3>
+          <div class="preferences">
+            <div class="row row-cols-1 row-cols-md g-3">
+              <div class="col-4" th:each="preference : ${user.preferences}">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <h5 th:text="${preference.key.getName()}" class="card-title"></h5>
+                    <p th:text="'How much do you like ' + ${preference.key.getName()} + '?'" class="card-text"></p>
+                    <div class="d-flex justify-content-evenly">
+                      <label for="range" class="col-4">Not so much</label>
+                      <input type="range" class="form-range" id="range" th:value="${preference.value}">
+                      <label class="col-4">Very much</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

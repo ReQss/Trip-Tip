@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripTip</title>
+    <!-- Link to Bootstrap CSS stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <style>
+
+    .slider {
+      width: 800px;
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .slides {
+      width: 500%;
+      height: 500px;
+      display: flex;
+    }
+
+    .slides input {
+      display: none;
+    }
+
+    .slide {
+      width: 20%;
+      transition: 2s;
+    }
+
+    .slide img {
+      width: 800px;
+      height: 500px;
+    }
+
+    /*css for manual slide navigation*/
+
+    .navigation-manual {
+      position: absolute;
+      width: 800px;
+      margin-top: -40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .manual-btn {
+      border: 2px solid #40d3dc;
+      padding: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 1s;
+    }
+
+    .manual-btn:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    .manual-btn:hover {
+      background: #40d3dc;
+    }
+
+    #radio1:checked ~ .first {
+      margin-left: 0;
+    }
+
+    #radio2:checked ~ .first {
+      margin-left: -20%;
+    }
+
+    #radio3:checked ~ .first {
+      margin-left: -40%;
+    }
+
+    #radio4:checked ~ .first {
+      margin-left: -60%;
+    }
+
+    /*css for automatic navigation*/
+
+    .navigation-auto {
+      position: absolute;
+      display: flex;
+      width: 800px;
+      justify-content: center;
+      margin-top: 460px;
+    }
+
+    .navigation-auto div {
+      border: 2px solid #40d3dc;
+      padding: 5px;
+      border-radius: 10px;
+      transition: 1s;
+    }
+
+    .navigation-auto div:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    #radio1:checked ~ .navigation-auto .auto-btn1 {
+      background: #40d3dc;
+    }
+
+    #radio2:checked ~ .navigation-auto .auto-btn2 {
+      background: #40d3dc;
+    }
+
+    #radio3:checked ~ .navigation-auto .auto-btn3 {
+      background: #40d3dc;
+    }
+
+    #radio4:checked ~ .navigation-auto .auto-btn4 {
+      background: #40d3dc;
+    }
+
+    .slider {
+      width: 900px;
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .sld-rev-container {
+      display: flex;
+      flex-direction: row;
+      width: 1286.19px;
+    }
+
+    .reviews {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px;
+      flex-basis: 516.19px;
+      width: 100%;
+    }
+
+    .window-container {
+      width: 400px;
+      height: 250px;
+      border: 1px solid #ccc;
+      overflow: auto;
+      padding: 5px;
+      background-color: bisque;
+      border-radius: 10px;
+    }
+
+    .person {
+      margin-left: 12px;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      align-items: center;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      object-fit: cover;
+    }
+
+    .name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin-top: 2px;
+    }
+
+    .general-info {
+      width: 100%;
+      margin-left: 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .general-info p {
+      margin: 4px;
+      font-size: 1.5rem;
+    }
+
+    .map img {
+      width: 130px;
+      height: 200px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      margin-left: -30px;
+    }
+
+    likes span {
+      flex-direction: row;
+      color: red;
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 10px;
+    }
+
+    .like {
+      position: relative;
+      font-size: 30px;
+      display: block;
+      margin-top: 13px;
+    }
+
+    .heart {
+      position: absolute;
+      right: 10px;
+      font-weight: bold;
+      top: 50%;
+      transform: translateY(-55%);
+      font-size: 4rem;
+      color: rgb(225, 94, 94);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .heart:hover {
+      color: rgb(243, 15, 15);
+    }
+
+    .window-container p {
+      margin-left: 15px;
+    }
+
+    .dest-name {
+        margin-right: 50px;
+         text-align: center;
+    }
+
+    .header{
+        margin-top:2%;
+        text-align: center;
+        float:left;
+        width:100%;
+        height:30%;
+    }
+
+    input{
+        text-align: center;
+        width:50%;
+        opacity:0.8;
+        background: #cccccccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+
+    input:hover{
+        color:#cccccccc;
+        background-color:black;
+        transition: 0.3s;
+    }
+
+    .search-bar{
+
+        float:left;
+        width:30%;
+        height:100%;
+    }
+
+    .header-buttons{
+        padding-right: 3%;
+        text-align: right;
+        float:left;
+        height:100%;
+        width:35%;
+
+    }
+
+    .nav-button{
+        margin-left:5px;
+        width:30px;
+    }
+
+    .nav-button:hover{
+        transition: 0.3s;
+        transform:scale(1.2);
+        filter:invert(0.5);
+    }
+
+    </style>
+
+</head>
+<body>
+<th:block th:replace="~{navbar :: navbar(user=${user})}"></th:block>
+<div class="container-fluid py-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
+    <div class="row flex-grow-sm-1 flex-grow-1">
+        <th:block th:replace="~{navbar :: sidebar(user=${user})}"></th:block>
+
+        <!-- Main content section -->
+        <main class="col overflow-auto h-100">
+            <div class="container bg-light border rounded-3 p-3">
+                <!-- Main content goes here -->
+                <h1 class="dest-name" th:text = "${destination.getName()}"></h1>
+                <p th:text="${destination.getDescription()}"></p>
+
+                <div class="sld-rev-container">
+                    <div class="slider">
+                        <div class="slides">
+                            <input type="radio" name="radio-btn" id="radio1" />
+                            <input type="radio" name="radio-btn" id="radio2" />
+                            <input type="radio" name="radio-btn" id="radio3" />
+                            <input type="radio" name="radio-btn" id="radio4" />
+                            <div class="slide first">
+                                <img
+                                        src="https://images.unsplash.com/photo-1655476967861-7cf1eeb1a79f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                                        alt=""
+                                />
+                            </div>
+                            <div class="slide">
+                                <img
+                                        src="https://images.unsplash.com/photo-1631142543992-c1d1a271694b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                                        alt=""
+                                />
+                            </div>
+                            <div class="slide">
+                                <img
+                                        src="https://images.unsplash.com/photo-1549721609-8dc23c55d1ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                                        alt=""
+                                />
+                            </div>
+                            <div class="slide">
+                                <img
+                                        src="https://images.unsplash.com/photo-1568918807585-631b85f5bbbf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                                        alt=""
+                                />
+                            </div>
+                            <div class="navigation-auto">
+                                <div class="auto-btn1"></div>
+                                <div class="auto-btn2"></div>
+                                <div class="auto-btn3"></div>
+                                <div class="auto-btn4"></div>
+                            </div>
+                        </div>
+                        <div class="navigation-manual">
+                            <label for="radio1" class="manual-btn"></label>
+                            <label for="radio2" class="manual-btn"></label>
+                            <label for="radio3" class="manual-btn"></label>
+                            <label for="radio4" class="manual-btn"></label>
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <div class="general-info">
+                            <div class="info">
+                                <p class="name">Name: Geres</p>
+                                <p class="country">Country: Portugal</p>
+                                <p class="likes"><span>&#9825;</span> Likes: 527</p>
+                                <p>Reviews: 4</p>
+                                <div th:if="${user!=null&&destination!=null}">
+                                    <form th:action="@{'/favDestination/{name}'(name=${destination.getName()})}" method="POST">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i th:text="${user.hasFavourite(destination.getName())} ? ' Dislike me!' : ' Like me!'"
+                                               th:class="${user.hasFavourite(destination.getName())} ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="map">
+                                <img src="https://www.senderismo.net/media/3109280/portugalpn.gif?width=300&pad=true&bgcolor=ffffff" alt="" />
+                            </div>
+                        </div>
+                        <div class="window-container">
+                            <!-- Content goes here -->
+                            <div class="person">
+                                <div class="logo">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/59a706d4f5e2319b70240ef9/1513035266082-M8UG33L62TIUPH890Z4X/fugere-circle.png?format=300w" alt="" />
+                                </div>
+                                <div class="name">Dorota Marudna</div>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+                                sit amet erat ut eros commodo porta nec ut mauris. Sed efficitur,
+                                tortor et volutpat ultrices, justo nunc lacinia ligula, at auctor
+                                justo ipsum at lorem.
+                            </p>
+                            <div class="person">
+                                <div class="logo">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/506c8ea1e4b01d9450dd53f5/07c9b09c-3b33-4dba-a00a-44636aed8ff4/Headshot-Jesse-Marks.png?format=300w" alt="" />
+                                </div>
+                                <div class="name">Marcin Flejtuch</div>
+                            </div>
+                            <p>
+                                Maecenas in dictum nulla. Duis varius, leo sed tincidunt iaculis,
+                                nunc elit consequat sapien.
+                            </p>
+                            <div class="person">
+                                <div class="logo">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/58122f418419c2a2e635807d/1632426973003-2ZMXLMWHUF26AT0V9QZP/Trevor+headshot+circle+4.png?format=500w" alt="" />
+                                </div>
+                                <div class="name">Andrzej Zgubny</div>
+                            </div>
+                            <p>
+                                Etiam finibus venenatis augue eget faucibus. Nam in lacinia neque.
+                                Aliquam erat volutpat. Aliquam mattis, leo sed luctus euismod, nunc
+                                urna lacinia mi, id hendrerit est lectus sed nunc. In sed ultrices
+                                nisi, non consectetur velit.
+                            </p>
+                            <div class="person">
+                                <div class="logo">
+                                    <img src="https://pe-images.s3.amazonaws.com/basics/2023/crop-image-as-circle/image-cropped-as-circle-photoshop.jpg" alt="" />
+                                </div>
+                                <div class="name">Kunegunda Bródka</div>
+                            </div>
+                            <p>
+                                Etiam finibus venenatis augue eget faucibus. Nam in lacinia neque.
+                                Aliquam erat volutpat. Aliquam mattis, leo sed luctus euismod, nunc
+                                urna lacinia mi, id hendrerit est lectus sed nunc. In sed ultrices
+                                nisi, non consectetur velit.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+      var counter = 1;
+      setInterval(function () {
+        document.getElementById('radio' + counter).checked = true;
+        counter++;
+        if (counter > 4) {
+          counter = 1;
+        }
+      }, 5000);
+    </script>
+</body>
+</html>

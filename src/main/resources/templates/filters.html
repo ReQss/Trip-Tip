@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripTip</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script>
+        var dm = 0;
+        function dark_mode() {
+            if (dm === 1) {
+                dm = 0;
+                document.body.style.background = "white";
+            } else {
+                dm = 1;
+                document.body.style.background = "#282A3A";
+            }
+        }
+    </script>
+    <style>
+
+    body{
+        height:100%;
+        width:100%;
+
+    }
+
+
+
+
+    .header{
+        margin-top:2%;
+        text-align: center;
+        float:left;
+        width:100%;
+        height:30%;
+    }
+    input{
+        text-align: center;
+        width:50%;
+        opacity:0.8;
+        background: #cccccccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    input:hover{
+        color:#cccccccc;
+        background-color:black;
+        transition: 0.3s;
+    }
+    .search-bar{
+
+        float:left;
+        width:30%;
+        height:100%;
+    }
+    .header-buttons{
+        padding-right: 3%;
+        text-align: right;
+        float:left;
+        height:100%;
+        width:35%;
+
+    }
+    input{
+        text-align: center;
+        width:50%;
+        opacity:0.8;
+        background: #cccccccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    input:hover{
+        color:#cccccccc;
+        background-color:black;
+        transition: 0.3s;
+    }
+    .search-bar{
+
+        float:left;
+        width:30%;
+        height:100%;
+    }
+        .header-buttons{
+            float:left;
+            height:100%;
+            width:35%;
+
+        }
+        .nav-button{
+            margin-left:5px;
+            width:30px;
+        }
+        .nav-button:hover{
+            transition: 0.3s;
+            transform:scale(1.2);
+            filter:invert(0.5);
+        }
+    .content{
+        margin:5%;
+        width:90%;
+        height:50%;
+        float:left;
+
+        text-align: center;
+        color:white;
+    }
+    .content-block{
+        width:14.3%;
+        height:400px;
+        margin-left:2%;
+        float:left;
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    .content-block:hover{
+        transition:0.3s;
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+    #mountains{
+        background-size: cover;
+        background-image: url("https://media.istockphoto.com/id/1288385045/photo/snowcapped-k2-peak.jpg?s=612x612&w=0&k=20&c=sfA4jU8kXKZZqQiy0pHlQ4CeDR0DxCxXhtuTDEW81oo=");
+    }
+    #beach{
+        background-image: url("https://thumbs.dreamstime.com/b/sunrise-over-beach-cancun-beautiful-mexico-40065727.jpg");
+        background-size: cover;
+    }
+    #park{
+        background-size: cover;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Halleyparknovember.jpg/1200px-Halleyparknovember.jpg");
+    }
+    #water{
+        background-image: url("https://media.istockphoto.com/id/467367026/photo/perfect-sky-and-ocean.jpg?s=612x612&w=0&k=20&c=LZYFRxIhuKQom3l-kR3TLN7GikSJYJz9NRglQ3nngBw=");
+        background-size: cover;
+    }
+    #desert{
+        background-size: cover;
+        background-image: url("https://i.insider.com/5ab96b1e83ea88e7008b459f?width=1136&format=jpeg");
+    }
+    #art{
+        background-image: url("https://lh3.googleusercontent.com/ci/AJFM8rwqdr4P_2MEV_92ilEISXIY16I3ab9TKeyYy67BN86mP5Z5n9jWtys5zoHo5M9Xc935QBG7sQ");
+        background-size: cover;
+    }
+    a{
+        text-decoration: none;
+    }
+    .footer{
+        float:left;
+        width:100%;
+        height:10%;
+    }
+    .back{
+        text-decoration: none;
+        color:white;
+        text-align: center;
+        width:15%;
+        height:94%;
+        margin-left:5%;
+        opacity:0.8;
+        background: rgba(151, 251, 238, 0.6);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    .back:hover{
+        transform:scale(1.3);
+        transition: 0.3s;
+    }
+    select{
+        opacity:0.8;
+        width:20px;
+        background: #cccccccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+    </style>
+</head>
+<body>
+<div class="header" >
+
+
+    <div class="header-buttons">
+        <a href="/" style="text-decoration: none;color: black"><h4 style="text-align: left;margin-left: 20px;">Trip-Tip</h4></a>
+
+    </div>
+    <div class="search-bar">
+
+        <form>
+            <select src="https://cdn-icons-png.flaticon.com/512/162/162735.png" >
+
+                <option >Cheapest</option>
+                <option >Expensive</option>
+                <option >Popularity</option>
+                <option >Alphabetical</option>
+
+
+            </select>
+            <input type="text" id="search_bar" placeholder="Search bar" >
+            <input type="submit" value="&check;" style="width:25px" class="nav-button" >
+
+
+        </form>
+    </div>
+    <!---
+    <th:block th:replace="navbar :: navbar"></th:block> -->
+    <div class="header-buttons">
+        <img onclick="dark_mode()" class="nav-button"src="https://cdn-icons-png.flaticon.com/512/6714/6714978.png" width="35px">
+        <a href="filters">
+            <img class="nav-button" src ="https://cdn.icon-icons.com/icons2/1993/PNG/512/filter_filters_funnel_list_navigation_sort_sorting_icon_123212.png">
+        </a>
+        <a  th:if="${user != null}" href="/profile" >
+            <img class="nav-button"  src="https://cdn-icons-png.flaticon.com/512/39/39563.png">
+        </a>
+        <a  th:if="${user == null}" href="/user/login" >
+            <img class="nav-button"  src="https://cdn-icons-png.flaticon.com/512/39/39563.png">
+        </a>
+    </div>
+</div>
+
+
+
+            <!-- Main content section -->
+
+                <div class="content" >
+                    <h1>Filters</h1>
+                    <form action="/search">
+                    <a href="/" name="argument"><div id="mountains" class="content-block">
+                    <h2>Mountains</h2></div>
+                    </a>
+                    <div id="beach"class="content-block">
+                        <h2>Beach</h2></div>
+                    <div id="park"class="content-block">
+                        <h2>Park</h2></div>
+                    <div id="water"class="content-block">
+                        <h2>Ocean</h2></div>
+                    <div id="desert"class="content-block">
+                        <h2>Desert</h2></div>
+                    <div id="art"class="content-block">
+                        <h2>Art</h2></div>
+                    </form>
+                </div>
+
+
+
+<div class="footer">
+    <a href="/" ><div class="back">
+        <h1>BACK</h1>
+    </div></a>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

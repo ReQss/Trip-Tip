@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripTip</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Ours css -->
+  <link rel="stylesheet" href="stylesheet.css">
+
+  <script>
+    var dm = 0;
+    function dark_mode() {
+      if (dm === 1) {
+        dm = 0;
+        document.body.style.background = "white";
+      } else {
+        dm = 1;
+        document.body.style.background = "#282A3A";
+      }
+    }
+  </script>
+  <style>
+    .header{
+      margin-top:2%;
+      text-align: center;
+      float:left;
+      width:100%;
+      height:30%;
+    }
+
+    input{
+      text-align: center;
+      width:50%;
+      opacity:0.8;
+      background: #cccccccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(151, 251, 238, 0.3);
+    }
+
+    input:hover{
+      color:#cccccccc;
+      background-color:black;
+      transition: 0.3s;
+    }
+
+    .search-bar{
+
+      float:left;
+      width:30%;
+      height:100%;
+    }
+
+    .header-buttons{
+      padding-right: 3%;
+      text-align: right;
+      float:left;
+      height:100%;
+      width:35%;
+
+    }
+
+    .nav-button{
+      margin-left:5px;
+      width:30px;
+    }
+
+    .nav-button:hover{
+      transition: 0.3s;
+      transform:scale(1.2);
+      filter:invert(0.5);
+    }
+  </style>
+</head>
+<body>
+
+
+  <th:block th:replace="~{navbar :: navbar(user=${user}, word=${searched})}"></th:block>
+
+
+<div id="main">.
+  <div  class="container-fluid py-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
+    <div class="row flex-grow-sm-1 flex-grow-1">
+      <th:block th:replace="~{navbar :: sidebar(user=${user})}"></th:block>
+
+      <!-- Main content section -->
+
+      <main class="col overflow-auto h-100">
+        <div class="container bg-light border rounded-3 p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0" th:text="${showingFavourites} ? 'Favourites' : 'Browse'"></h1>
+            <form action="/sort">
+              <div class="input-group" style="width: fit-content; height: min-content">
+
+                  <label class="input-group-text" for="sort_by">Sort by</label>
+                  <select class="form-select" id="sort_by" name="sortOption">
+                    <option th:each="option : ${T(com.example.triptip.model.SortOrder).values()}"
+                            th:text="${option.displayName}"
+                            th:value="${option.id}"
+                            th:selected="${sortOrder.toString() == option.id.toString()}"></option>
+                  </select>
+                  <button class="btn btn-outline-secondary" type="submit">Sort</button>
+
+              </div>
+            </form>
+          </div>
+          <hr/>
+          <div class="row row-cols-1 row-cols-md g-3">
+            <div th:each="destination : ${destinations}"
+                 th:if="${showingFavourites == false || user.hasFavourite(destination.getName())}" class="col-3">
+              <div class="card">
+                <img th:src="${destination.getPictureUrl()}" class="card-img-top" alt="Card image cap" style="object-fit: cover; height: 8rem!important;">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${destination.getName()}">Card title</h5>
+                  <p class="card-text text-truncate"><span th:text="${destination.getDescription()}"></span>.</p>
+                  <a th:href="@{/destination(name=${destination.getName()})}" class="btn btn-primary">Learn more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">.</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

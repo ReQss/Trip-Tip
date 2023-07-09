@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripTip</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+
+
+
+
+        .header{
+            margin-top:2%;
+            text-align: center;
+            float:left;
+            width:100%;
+            height:30%;
+        }
+        input{
+            text-align: center;
+            width:50%;
+            opacity:0.8;
+            background: #cccccccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(151, 251, 238, 0.3);
+        }
+        input:hover{
+            color:#cccccccc;
+            background-color:black;
+            transition: 0.3s;
+        }
+        .search-bar{
+
+            float:left;
+            width:30%;
+            height:100%;
+        }
+        .header-buttons{
+            padding-right: 3%;
+            text-align: right;
+            float:left;
+            height:100%;
+            width:35%;
+
+        }
+        input{
+            text-align: center;
+            width:50%;
+            opacity:0.8;
+            background: #cccccccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(151, 251, 238, 0.3);
+        }
+        input:hover{
+            color:#cccccccc;
+            background-color:black;
+            transition: 0.3s;
+        }
+        .search-bar{
+
+            float:left;
+            width:30%;
+            height:100%;
+        }
+        .header-buttons{
+            float:left;
+            height:100%;
+            width:35%;
+
+        }
+        .nav-button{
+            margin-left:5px;
+            width:30px;
+        }
+        .nav-button:hover{
+            transition: 0.3s;
+            transform:scale(1.2);
+            filter:invert(0.5);
+        }
+        select{
+            opacity:0.8;
+            width:20px;
+            background: #cccccccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(151, 251, 238, 0.3);
+        }
+    </style>
+    <script>
+        var dm = 0;
+        function dark_mode() {
+            if (dm === 1) {
+                dm = 0;
+                document.body.style.background = "white";
+            } else {
+                dm = 1;
+                document.body.style.background = "#282A3A";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="header" >
+
+    <div class="header-buttons"> <a href="/" style="text-decoration: none;color: black"><h4 style="text-align: left;margin-left: 20px;">Trip-Tip</h4></a>
+    </div>
+    <div class="search-bar">
+
+        <form>
+            <select src="https://cdn-icons-png.flaticon.com/512/162/162735.png" >
+
+                <option >Cheapest</option>
+                <option >Expensive</option>
+                <option >Popularity</option>
+                <option >Alphabetical</option>
+
+
+            </select>
+            <input type="text" id="search_bar" placeholder="Search bar" >
+            <input type="submit" value="&check;" style="width:25px" class="nav-button" >
+
+
+        </form>
+    </div>
+    <!---
+    <th:block th:replace="navbar :: navbar"></th:block> -->
+    <div class="header-buttons">
+        <img onclick="dark_mode()" class="nav-button"src="https://cdn-icons-png.flaticon.com/512/6714/6714978.png" width="35px">
+        <a href="filters">
+            <img class="nav-button" src ="https://cdn.icon-icons.com/icons2/1993/PNG/512/filter_filters_funnel_list_navigation_sort_sorting_icon_123212.png">
+        </a>
+
+        <a  th:if="${user != null}" href="/profile" >
+            <img class="nav-button"  src="https://cdn-icons-png.flaticon.com/512/39/39563.png">
+        </a>
+        <a  th:if="${user == null}" href="/user/login" >
+            <img class="nav-button"  src="https://cdn-icons-png.flaticon.com/512/39/39563.png">
+        </a>
+    </div>
+</div>
+<div id="main">.
+<div class="container-fluid py-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
+    <div class="row flex-grow-sm-1 flex-grow-1">
+        <th:block th:replace="navbar :: sidebar(user=${user})"></th:block>
+
+        <!-- Main content section -->
+        <main class="col overflow-auto h-100">
+            <div class="container bg-light border rounded-3 p-3">
+
+                <!-- Main content goes here -->
+
+                <div th:if="${user != null}">
+                    <hr/>
+                    <h3>Preferences</h3>
+                    <form action="/pref/{tag}/{value}" method="post">
+                        <div class="row row-cols-1 row-cols-md g-3">
+                            <div class="col-4" th:each="tag : ${tags}">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 th:text="${tag.getName()}" class="card-title"></h5>
+                                        <p th:text="'How much do you like ' + ${tag.getName()} + '?'" class="card-text"></p>
+                                        <div class="d-flex justify-content-evenly">
+                                            <label for="range" class="col-4">Not so much</label>
+                                            <input name="value" type="range" class="form-range" id="range" min="0" max="10">
+                                            <label class="col-4">Very much</label>
+                                            <input type="hidden" name="tag" th:value="${tag.name()}">
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary w-100">Add preference</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
